@@ -19,6 +19,10 @@ type HandlerFunc func(*Context)
 
 var templates = map[string]*template.Template{}
 
+func (c *Context) Redirect(url string) {
+	http.Redirect(c.ResponseWriter, c.Request, url, http.StatusMovedPermanently)
+}
+
 func (c *Context) RenderTemplate(path string, v interface{}) {
 	// path에 해당하는 템플릿이 있는지 확인
 	t, ok := templates[path]
